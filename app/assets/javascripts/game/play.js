@@ -1,4 +1,7 @@
+var gamestate = {};
+
 function render(state) {
+  gamestate = state;
   $("form.game input[name='guess']").val("");
   $(".game .card--image img").attr("src", state["image"]);
 
@@ -80,10 +83,16 @@ $(function () {
 
   $("form.game").submit(function (e) {
     e.preventDefault();
-    var $form = $(e.target);
-    var data = $form.serialize();
-    $.post($form.attr("action"), data).done(function (state) {
-      render(state);
-    });
+    if (gamestate["state"] == "flipped" && gamestate["remaining"] > 0) {
+      $("#button_next").click();
+    } else if (gamestate["remaining"] == 0 || gamestate["state"] == "over") {
+      $("#button_finish").click();
+    } else {
+      var $form = $(e.target);
+      var data = $form.serialize();
+      $.post($form.attr("action"), data).done(function (state) {
+        render(state);
+      });
+    }
   });
 });
