@@ -172,3 +172,40 @@
 .flip .flipper .back {
     transform: rotatey(-180deg);
 }
+
+.ui-autocomplete {
+    background-color: $system-white;
+    color: $purple;
+    font-family: $body-type-family;
+    font-size: 1em;
+    text-align: left;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.ui-menu .ui-menu-item {
+    list-style: none;
+    border: 1px solid $system-gray-light;
+    margin-top: -1px;
+    &:first-child {
+        margin-top: 1em;
+    }
+}
+
+.ui-menu .ui-menu-item a {
+    display: block;
+    background-color: $system-white;
+    padding: 0.5em 1em;
+    border-radius: 0;
+    margin: 0;
+}
+
+.ui-menu .ui-menu-item a.ui-state-focus,
+.ui-menu .ui-menu-item a.ui-state-active {
+    margin: 0;
+    background: $system-gray-light;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+}
