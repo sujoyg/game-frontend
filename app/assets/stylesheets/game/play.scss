@@ -2,6 +2,7 @@
 @import "../core/mixins";
 
 .game {
+    background-color: $purple;
     color: $system-black;
     margin: 0 auto;
     min-height: 410px;
@@ -11,6 +12,7 @@
     background-color: $system-white;
     padding: 1em;
     height: 410px;
+    position: relative;
 }
 
 .card--image {
@@ -169,8 +171,4 @@
 }
 .flip .flipper .back {
     transform: rotatey(-180deg);
-}
-
-#button_finish {
-  display: none;
 }

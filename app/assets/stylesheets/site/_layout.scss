@@ -1,10 +1,18 @@
 #container {
     max-width: 480px;
-    background-color: rgba($background, 0.8);
-    margin: 3em auto;
+    background-color: rgba($purple, 0.8);
+    margin: 6em auto;
     padding: 1em;
     position: relative;
     z-index: 1;
+}
+
+@media only screen and (min-width: 480px) {
+    #container {
+        background-color: transparent;
+        margin-top: 3em;
+        margin-bottom: 3em;
+    }
 }
 
 header {
@@ -24,15 +32,8 @@ footer {
     padding: 1em;
 }
 
-@media only screen and (min-width: 480px) {
-
-    #main {
-        background-color: rgba($maroon, 0.6);
-    }
-
-}
-
 %background {
+    @include _animation(background, $duration:2s);
     position: fixed;
     top: 0;
     left: 0;
@@ -41,28 +42,59 @@ footer {
     z-index: 0;
     transform: skewX(-45deg) scale(1.5);
     background-repeat: repeat;
-    background-size: 100% 50%;
+    background-size: 50% 100%;
+}
+
+@-webkit-keyframes background {
+    0% {
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+@-moz-keyframes leaderboard {
+    0% {
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+@-ms-keyframes leaderboard {
+    0% {
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+@keyframes leaderboard {
+    0% {
+        margin-left: 25%;
+        margin-right: 25%;
+    }
 }
 
 .background_1 {
+    @extend %background;
+    background-color: $gold;
+    margin: 0 -5%;
+}
+
+.background_2 {
     @extend %background;
     background-color: $orange;
     margin: 0 5%;
 }
 
-.background_2 {
+.background_3 {
     @extend %background;
     background-color: $pink;
     margin: 0 10%;
 }
 
-.background_3 {
+.background_4 {
     @extend %background;
     background-color: $maroon;
     margin: 0 15%;
 }
 
-.background_4 {
+.background_5 {
     @extend %background;
     background-color: $background;
     margin: 0 20%;

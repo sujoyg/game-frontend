@@ -42,7 +42,7 @@
         background-position: left top;
     }
     100% {
-        background-position: left bottom;
+        background-position: right top;
     }
 }
 @-moz-keyframes leaderboard {
@@ -50,7 +50,7 @@
         background-position: left top;
     }
     100% {
-        background-position: left bottom;
+        background-position: right top;
     }
 }
 @-ms-keyframes leaderboard {
@@ -58,7 +58,7 @@
         background-position: left top;
     }
     100% {
-        background-position: left bottom;
+        background-position: right top;
     }
 }
 @keyframes leaderboard {
@@ -66,7 +66,7 @@
         background-position: left top;
     }
     100% {
-        background-position: left bottom;
+        background-position: right top;
     }
 }
 
@@ -74,23 +74,23 @@
     @include _animation(leaderboard, $duration:2s, $function:linear, $iteration:infinite);
 }
 
-#leaderboard {
+.background_1 {
     @extend %background__loading;
-    background-image: -webkit-linear-gradient(top, $gold, $orange, $gold);
-    .background_1 {
-        @extend %background__loading;
-        background-image: -webkit-linear-gradient(top, $orange, $pink, $orange);
-    }
-    .background_2 {
-        @extend %background__loading;
-        background-image: -webkit-linear-gradient(top, $orange, $pink, $orange);
-    }
-    .background_3 {
-        @extend %background__loading;
-        background-image: -webkit-linear-gradient(top, $pink, $maroon, $pink);
-    }
-    .background_4 {
-        @extend %background__loading;
-        background-image: -webkit-linear-gradient(top, $maroon, $purple, $maroon);
-    }
+    background-image: -webkit-linear-gradient(left, $gold, $orange, $gold);
+}
+.background_2 {
+    @extend %background__loading;
+    background-image: -webkit-linear-gradient(left, $orange, $pink, $orange);
+}
+.background_3 {
+    @extend %background__loading;
+    background-image: -webkit-linear-gradient(left, $pink, $maroon, $pink);
+}
+.background_4 {
+    @extend %background__loading;
+    background-image: -webkit-linear-gradient(left, $maroon, $purple, $maroon);
+}
+.background_5 {
+    @extend %background__loading;
+    background-image: -webkit-linear-gradient(left, $purple, rgba(0,0,0,.2), $purple);
 }
