@@ -1,0 +1,36 @@
+!!!DOCTYPE html
+%html
+    %head
+        %meta{ :charset => "utf-8" }
+
+        %title
+            = content_for?(:title) ? "#{yield(:title)} • #{$globals.app.titlecase}" : $globals.app.titlecase
+        %meta{ :name => "description", :content => "" }
+        %meta{ :name => "author", :content => "" }
+
+        %meta{ :name => "HandheldFriendly", :content => "True" }
+        %meta{ :name => "MobileOptimized", :content => "320" }
+        %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+        %meta{ "http-equiv" => "cleartype", :content => "on" }
+
+        = stylesheet_link_tag 'application', :media => 'all'
+        = page_css
+        = csrf_meta_tags
+
+    %body{ name: "#{controller.controller_name}/#{controller.action_name}", id: "#{controller.action_name}" }
+        .background_1
+        .background_2
+        .background_3
+        .background_4
+        #container
+            = content_for?(:content) ? yield(:content) : yield
+
+        = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+        :javascript
+            window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')
+
+        = javascript_include_tag "//use.typekit.net/pmi5vzb.js"
+        :javascript
+            try{Typekit.load();}catch(e){}
+        = javascript_include_tag 'application' # Includes jQuery. Must precede all other jQuery imports.
+        = page_javascript

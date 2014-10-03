@@ -1,0 +1,10 @@
+%header
+    %h1
+        - if current_user
+            = link_to home_path do
+                Name that
+                %span Coworker
+        - else
+            = link_to root_path do
+                Name that
+                %span Coworker

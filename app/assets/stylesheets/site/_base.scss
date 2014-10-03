@@ -1,0 +1,96 @@
+@include adb-icons($adb-icon-family, $adb-icon-path, $adb-icon-version, $adb-icon-names-map, '', $adb-icon-ratio, true);
+
+// This shows how to include concrete icon classes in your stylesheet.
+// Themes would only come with silent icons, which only impact styles when they're used.
+@include adb-icons-concrete($adb-icon-names-map, '');
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+ul,
+ol,
+li,
+menu {
+    @include _reset-box;
+}
+
+li {
+    list-style: none;
+}
+
+body,
+html {
+    background-color: $gold;
+    text-align: center;
+    font: normal 100%/1.6em $body-type-family;
+    color: $system-white;
+    font-weight: 100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: $title-type-family;
+    font-weight: 400;
+    color: $color-title;
+    &:first-child {
+        margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 100;
+    line-height: 100%;
+    font-size: 3em;
+    span {
+        font-weight: 600;
+        line-height: 80%;
+        font-style: normal;
+    }
+}
+
+h3 {
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 1.5em;
+    text-transform: capitalize;
+    color: $pink;
+    font-weight: 600;
+}
+
+a {
+    @include _transition;
+    text-decoration: none;
+    &,
+    &:link,
+    &:visited {
+        color: inherit;
+    }
+    &:hover {
+        color: $orange;
+    }
+}
+
+strong,
+b {
+    font-weight: 600;
+}
+
+p {
+    text-align: left;
+    a {
+        color: $pink;
+    }
+}

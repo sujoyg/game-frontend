@@ -1,0 +1,174 @@
+/* ---------------
+Base Theme: Icons
+--------------- */
+
+// Name of font face, which MUST match the font file names.
+$adb-icon-family: AppDirectIcons !default;
+$adb-icon-path: "fonts" !default;
+$adb-icon-version: "0.0.0" !default;
+
+$adb-base-icon-size: 16px !default;
+
+$adb-icon-names-map:
+
+undo "\e02a",
+redo "\e02b",
+refresh "\e03d",
+switch "\e02c",
+
+arrow_left "\e034",
+arrow_right "\e035",
+arrow_up "\e039",
+arrow_down "\e038",
+
+arrow_small_left "\e032",
+arrow_small_right "\e033",
+arrow_small_up "\e037",
+arrow_small_down "\e036",
+
+arrow_thin_left "\e61b",
+arrow_thin_right "\e61a",
+arrow_thin_up "\e619",
+arrow_thin_down "\e61c",
+
+arrow_thick_left "\e617",
+arrow_thick_right "\e616",
+arrow_thick_up "\e615",
+arrow_thick_down "\e618",
+
+triangle_left "\e02f",
+triangle_right "\e030",
+triangle_up "\e601",
+triangle_down "\e602",
+
+triangle_small_left "\e006",
+triangle_small_right "\e005",
+triangle_small_up "\e004",
+triangle_small_down "\e007",
+triangle_small_up_down "\e61e",
+
+angle_left "\e02d",
+angle_right "\e02e",
+angle_up "\e60f",
+angle_down "\e610",
+angle_double_left "\e63a",
+angle_double_right "\e639",
+angle_double_up "\e638",
+angle_double_down "\e63b",
+
+alert "\e00a",
+error "\e00b",
+check_circle "\e009",
+check "\e003",
+star "\e00c",
+star_sharp "\e00d",
+star_circle "\e00f",
+thumb_up "\e642",
+thumb_down "\e643",
+
+download "\e022",
+upload "\e63c",
+play "\e03c",
+question "\e01e",
+grid "\e028",
+list "\e029",
+dot "\e60d",
+share "\e613",
+ellipsis_circle "\e61d",
+dropdown "\e61e",
+no "\e630",
+lock "\e633",
+
+add "\e026",
+plus "\e631",
+reorder "\e025",
+link "\e023",
+unlink "\e024",
+remove "\e027",
+minus "\e62e",
+x_circle "\e000",
+x "\e020",
+x_medium "\e603",
+x_small "\e01f",
+
+search "\e03e",
+cog "\e015",
+cog_alt "\e014",
+cogs "\e646",
+wrench "\e031",
+screwdriver "\e644",
+tools "\e641",
+chat "\e017",
+company "\e016",
+users "\e013",
+user "\e012",
+home "\e03b",
+app "\e00e",
+apps "\e63d",
+module "\e614",
+screenshot "\e01a",
+file "\e01d",
+envelope "\e011",
+tag "\e019",
+pencil "\e010",
+trash "\e01b",
+credit_card "\e008",
+credit_card_small "\e01c",
+clock "\e018",
+clock_solid "\e03a",
+ellipsis "\e001",
+code "\e002",
+book "\e604",
+pin "\e605",
+newspaper "\e606",
+chat_rectangle "\e607",
+bell "\e608",
+paragraph "\e609",
+images "\e60a",
+folder_open "\e60b",
+folder_closed "\e60c",
+box "\e60e",
+eye "\e600",
+key "\e611",
+calendar "\e612",
+keyhole "\e634",
+graph-line "\e62f",
+graph-bar "\e635",
+graph-pie "\e632",
+heart "\e636",
+marketplace "\e637",
+bolt "\e647",
+
+yahoo "\e61f",
+twitter "\e620",
+tumblr "\e621",
+linkedin "\e622",
+jira "\e623",
+instagram "\e624",
+google "\e625",
+facebook "\e626",
+confluence "\e627",
+appdirect "\e640",
+jbilling "\e63f",
+standing_cloud "\e63e",
+apple "\e648",
+microsoft "\e645",
+
+smile "\e629",
+frown "\e62c",
+smile_big "\e62b",
+frown_big "\e62d",
+wink "\e628",
+smile_wink "\e62a" !default;
+
+
+
+// Icon ratio is (base icon size / base font size).
+// Indicates how much bigger the icons
+// should be relative to base font size
+$adb-icon-ratio: ($adb-base-icon-size / $baseline) !default;
+
+// Loading Icons
+$adb-loading-size: $adb-icon-ratio * 1em !default;
+$adb-loading-bar-width: ($adb-loading-size/4) !default;
+$adb-loading-bar-height: ($adb-loading-size/4) !default;

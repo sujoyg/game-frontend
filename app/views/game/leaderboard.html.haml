@@ -1,0 +1,11 @@
+- set_css 'game/leaderboard'
+
+%h3 Leaderboard
+
+%ul.leaderboard
+    - @leaderboard.each do |record|
+        %li
+            %span.leaderboard--name
+                = record.user.name
+            %span.leaderboard--score
+                = record.score

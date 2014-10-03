@@ -1,0 +1,52 @@
+- set_css 'game/play'
+- set_javascript 'game/play'
+
+= form_tag game_check_path, :class => "game flip", :data => {"next" => game_next_path, "finish" => game_leaderboard_path, "state" => game_state_path} do
+    .flipper{class: @remaining == 0 ? "flipped" : ""}
+        .face.front
+            .card.card__initial.clearfix
+                .card--image
+                    = image_tag @person.image
+                %fieldset.card--content
+                    .field
+                        = search_field_tag 'guess', '', :placeholder => "e.g., Johnny Apple"
+                %menu.form--submit
+                    = button_tag 'Enter', :type => "submit", :id => "button_enter"
+                    = button_tag 'Skip', :type => "button", :id => "button_skip"
+        .face.back
+            .card.card__result
+                .card--content
+                    %span.status.status__correct
+                        %i.icon__smile_big
+                        Correct!
+                    %span.status.status__incorrect
+                        %span.guess
+                        %i.icon__frown
+                        Wrong
+                    %h2.name
+                        Test name
+                    %p
+                        Title
+                        %br
+                        Department
+                        %br
+                        Location
+                    %p
+                        Say hey
+                        %br
+                        %a.email{ :href => "mailto:email@address.com" }
+                            email@address.com
+                %menu.form--submit
+                    = button_tag 'Next', :type => "submit", :id => "button_next"
+                %menu.finish
+                    = button_tag 'Finish', id: 'button_finish'
+.score
+    .score--unit.score--unit__correct
+        %span.score--number< #{@score}
+        %span.score--text correct
+    .score--unit.score--unit__total
+        %span.score--number>< #{@rounds}
+        %span.score--text total
+    .score--unit.score--unit__rounds
+        %span.score--number< #{@remaining}
+        %span.score--text more tries

@@ -1,0 +1,180 @@
+// ---------------------
+// Components: Icons
+// ---------------------
+
+// --------- Dependencies --------- //
+
+@import "../core/variables";
+@import "variables";
+@import "mixins";
+
+// --------- Placeholders --------- //
+
+$adb-icons-included: false !default;
+
+@if not($adb-icons-included) {
+
+    $adb-icons-included: true;
+
+    // Properties shared by all icons
+    %adb-icon {
+        text-decoration: inherit;
+        font-weight: normal;
+        font-style: normal;
+        speak: none;
+
+        @if $adb-support-webkit {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @if $adb-support-ie7 {
+            *margin-right: .3em; // fixes ie7 issues
+        }
+    }
+
+}
+
+// --------- Mixins --------- //
+
+// Creates base styles for icons based on the same font family.
+// @private
+// @mixin   _adb-icon-base
+// @param   $icon-font-family {String} font family used for the icon
+// @param   $icon-ratio {Number} optional ratio relative to current font size, used to compute optimal icon size
+// @usage:
+// %foo-icon-base {
+//     =_adb-icon-base("FooIconFont", 1.3);
+// }
+@mixin _adb-icon-base($icon-font-family, $icon-ratio: 1) {
+    @extend %adb-icon;
+    @include _adb-vertically-centered-optimally-sized-icon($icon-ratio);
+    font-family: quote($icon-font-family);
+}
+
+// Set up the font face specified by $icon-font-family, and create font icon classes from $icon-font-family, and $icon-name-map.
+// To allow maximum versatility, color and size are not specified in these font icon classes.
+//
+// To use the icons, use _adb-icon().
+// TODO write a Sass script to squish all white space in $icon-font-family
+//
+// @mixin   adb-icons
+// @param   $icon-font-family {String} name of font face, which MUST match the font file names inside the font/ dir.
+// @param   $icon-path {String} relative path to the font/ dir
+// @param   $icon-version {String} version of the font, for cache-busting
+// @param   $icon-name-map {List} comma-separated list. Each item is a key-value pair where the key is the icon name, and value is the character corresponding to the icon in the font, e.g. star "\e02a", alert "\e00a".
+// @param   $prefix {String} optional prefix for class names, should include '-' at the end. Default: null
+// @param   $icon-ratio {Number} optional ratio relative to current font size, used to compute optimal icon size
+// @param   $is-default {Boolean} optional. If icons are the default set, then selectors don't contain the icon family name for brevity. Default: false
+// @param   $generate-concrete {Boolean} optional. Flag to indicate if concrete classes should be generated so they can be used directly. Default: false
+// @usage:
+// $icon-names: star "\e02a", alert "\e00a";
+// =adb-icons($icon-font-family: "FooIconFont", $icon-path: "../font", $icon-version: "1.0.0", $icon-name-map: $icon-names, $prefix: "abc-");
+// @see _adb-icon
+@mixin adb-icons(
+    $icon-font-family,
+    $icon-path,
+    $icon-version,
+    $icon-name-map,
+    $prefix: null,
+    $icon-ratio: 1,
+    $is-default: false,
+    $generate-concrete: false
+) {
+    $icon-base-class: if($is-default, #{$prefix}icon, #{$prefix}#{$icon-font-family}_icon);
+
+    // @@TODO - use new lib mixin for this
+    // mixin will need to be updated for conditional use of $icon-version variable.
+    @font-face {
+        font-weight: normal;
+        font-style: normal;
+        font-family: $icon-font-family;
+        src:url('#{$icon-path}/#{$icon-font-family}.eot?v=#{$icon-version}');
+        src:url('#{$icon-path}/#{$icon-font-family}.eot?#iefix') format('embedded-opentype'),
+            url('#{$icon-path}/#{$icon-font-family}.woff?v=#{$icon-version}') format('woff'),
+            url('#{$icon-path}/#{$icon-font-family}.ttf?v=#{$icon-version}') format('truetype'),
+            url('#{$icon-path}/#{$icon-font-family}.svg#iconography?v=#{$icon-version}') format('svg');
+    }
+
+    // Generate the icon base that icons should all @extend
+    %#{$icon-base-class} {
+        @include _adb-icon-base($icon-font-family, $icon-ratio);
+    }
+
+    @each $pair in $icon-name-map {
+        $icon-class: #{$icon-base-class}__#{nth($pair, 1)};
+
+        // Generate icon silent selector
+        %#{$icon-class} {
+            @extend %#{$icon-base-class};
+
+            @if $adb-support-ie7 {
+                // IE7
+                @include _adb-ie7-icon(adb-html-encode(nth($pair, 2)));
+            }
+
+            // Normal browsers
+            content: nth($pair, 2);
+        }
+    }
+
+    @if $generate-concrete {
+        // Generate concrete classes
+        @include adb-icons-concrete($icon-name-map, $prefix, if($is-default, null, $icon-font-family));
+    }
+}
+
+// Generate concrete classes so they can be used directly. If $icon-font-family is not provided, assume
+// use default icons.
+// Precondition: adb-icons() was called already.
+// @mixin   adb-icons-concrete
+// @param   $icon-name-map {List} must match $icon-name-map param value in adb-icons() call
+// @param   $prefix {String} optional. Must match $prefix param value in adb-icons() call
+// @param   $icon-font-family {String} optional. Must matc $icon-font-family param value in adb-icons() call
+// @usage:
+// $icon-names: star "\e02a", alert "\e00a";
+// =adb-icons-concrete($icon-font-family: "FooIconFont", $icon-name-map: $icon-names, $prefix: "abc-");
+// @see adb-icons
+@mixin adb-icons-concrete(
+    $icon-name-map,
+    $prefix: null,
+    $icon-font-family: null
+) {
+    $icon-base-class: if($icon-font-family == null, #{$prefix}icon, #{$prefix}#{$icon-font-family}_icon);
+
+    .#{$icon-base-class} {
+        @extend %#{$icon-base-class};
+    }
+
+    @each $pair in $icon-name-map {
+        $icon-class: #{$icon-base-class}__#{nth($pair, 1)};
+
+        .#{$icon-class} {
+            &:before {
+                @extend %#{$icon-class};
+            }
+        }
+    }
+}
+
+// Works like Compass sprite @mixin, so when you want a class to use a font icon, @include
+// this mixin inside either the :before or :after for the class. If $icon-font-family is not provided, assume
+// use default icons.
+// Precondition: adb-icons() was called already to set up icons.
+// @mixin   _adb-icon
+// @param   $icon-name {String} name of icon which was provided in the icon name map for adb-icons()
+// @param   $prefix {String} optional. Must match $prefix param value in adb-icons() call
+// @param   $icon-font-family {String} optional. Must match $icon-font-family param value in adb-icons() call
+// @usage:
+// .favorite-button:before {
+//     =_adb-icon("star", "abc-", "FooIconFont");
+// }
+// @see adb-icons
+@mixin _adb-icon(
+    $icon-name,
+    $prefix: null,
+    $icon-font-family: null
+    ) {
+    $icon-base-class: if($icon-font-family == null, #{$prefix}icon, #{$prefix}#{$icon-font-family}_icon);
+    $icon-class: #{$icon-base-class}__#{$icon-name};
+    @extend %#{$icon-class};
+}

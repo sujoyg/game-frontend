@@ -1,0 +1,74 @@
+// ---------------
+// Core Variables
+// ---------------
+
+// Flags to indicate user stylesheet browser support
+$adb-support-ie7: true !default;
+$adb-support-ie8: true !default;
+$adb-support-ie9: true !default;
+$adb-support-ie10: true !default;
+$adb-support-ie: $adb-support-ie7 or $adb-support-ie8 or $adb-support-ie9 or $adb-support-ie10;
+
+$adb-support-mozilla: true !default;
+
+$adb-support-webkit: true !default;
+
+$adb-support-opera: false !default;
+
+$adb-support-khtml: false !default;
+
+// Media query breakpoints users can customize. Used by responsive mixins
+// This is a list-map within a list-map. In a list map, each comma-separated pair is a key followed by value.
+// The keys at the 1st level are media breakpoint names, and values are breakpoint options.
+// The keys at the 2nd level are option names followed by values. Available options are:
+// - active {Boolean} if true, then this breakpoint is in use. Relevant to application layer
+// - min-width {Number} can be null
+// - max-width {Number} can be null
+$adb-breakpoints:
+    desktop (
+        active true,
+        min-width 1024px,
+        max-width null
+    ),
+    desktop-large (
+        active true,
+        min-width 1280px,
+        max-width null
+    ) !default;
+
+// Override Compass support variables
+$legacy-support-for-ie6: false;
+$legacy-support-for-ie7: $adb-support-ie7;
+$legacy-support-for-ie8: $adb-support-ie8;
+$experimental-support-for-mozilla: $adb-support-mozilla;
+$experimental-support-for-webkit: $adb-support-webkit;
+$support-for-original-webkit-gradients: false;
+$experimental-support-for-opera: $adb-support-opera;
+$experimental-support-for-microsoft: $adb-support-ie;
+$experimental-support-for-khtml: $adb-support-khtml;
+
+$body-type-family: "jaf-facitweb", sans-serif;
+$title-type-family: "jubilat",sans-serif;
+$baseline: 16px;
+
+// palette
+$gold: #F0C27B;
+$orange: #D38157;
+$pink: #7F2B51;
+$maroon: #4B1248;
+$purple: #1D0B38;
+
+$background: $purple;
+$system-black: $purple;
+$system-gray-dark: #555555;
+$system-gray-medium: #AAAAAA;
+$system-gray-light: #DDDDDD;
+$system-white: #FFFFFF;
+
+$color-title: $gold;
+
+%number {
+    font-size: 2em;
+    font-family: $title-type-family;
+    font-weight: 600;
+}

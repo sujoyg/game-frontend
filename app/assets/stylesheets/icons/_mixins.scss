@@ -1,0 +1,84 @@
+/* ---------------
+Core Mixins: Iconography
+--------------- */
+
+// Additional style that fixes icon for IE7. Used when first generating an icon.
+// @mixin   _adb-ie7-icon
+// @param   $icon-char {String} HTML-encoded string that represent the char mapped to icon, e.g. "\e00a"
+// @usage:
+// $support-ie7: true;
+//
+// %foo-icon-base {
+//     =_adb-icon-base("FooIconFont");
+// }
+//
+// %foo-star-icon {
+//     \@extend %foo-icon-base;
+//
+//     $icon-char: "\e00a";
+//
+//     \@if $support-ie7 {
+//         // IE7
+//         =_adb-ie7-icon(adb-html-encode($icon-char));
+//     }
+//
+//     // Normal browsers
+//     &:before {
+//         content: $icon-char;
+//     }
+// }
+// @see _adb-icon-base
+@mixin _adb-ie7-icon($icon-char) {
+    *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '#{$icon-char}');
+}
+
+// make the icon an inline block element that displays the symbol at its optimal size
+// relative to current font size and centers it vertically within a container.
+// TODO find a better name if possible.
+// @mixin   _adb-vertically-centered-optimally-sized-icon
+// @param   $icon-ratio {Number} ratio relative to current font size, used to compute optimal icon size
+// @usage:
+// .favorite-button {
+//     =_adb-icon("star", "abc-", "IconFontFace");
+//     =_adb-vertically-centered-optimally-sized-icon(16px / 14px);
+// }
+@mixin _adb-vertically-centered-optimally-sized-icon($icon-ratio, $alignment:top) {
+    @include _inline-block($alignment);
+    text-align: center;
+    font-size: $icon-ratio * 1em;
+}
+
+// --------------------------
+// Theme Rule Mixins: Icons
+// --------------------------
+
+// Output theme rules for icon sizes based on font sizes and icon ratio.
+// Use _adb-theme-icon-size() to adhere to a theme rule.
+// @mixin   adb-theme-icon-sizes
+// @param   $font-sizes {List} comma-separated list. Each item is a key-value pair where the key is the font size name, and value is the font size, e.g. small 8px, medium 12px, large 16px
+// @param   $icon-ratio {Number} ratio relative to current font size, used to compute optimal icon size
+// @usage:
+// $theme-font-sizes: small 8px, medium 12px, large 16px;
+// =adb-theme-icon-sizes($theme-font-sizes, 16px / 12px);
+// @see _adb-theme-icon-size
+@mixin adb-theme-icon-sizes($font-sizes, $icon-ratio) {
+    @each $pair in $font-sizes {
+        %adb-theme-icon_size__#{nth($pair, 1)} {
+            font-size: nth($pair, 2) * $icon-ratio;
+        }
+    }
+}
+
+// Makes it convenient to adhere to icon size theme rules.
+// Precondition: adb-theme-icon-sizes() was called.
+// @mixin   _adb-theme-icon-size
+// @param   $size-name {String} name of font size which was provided in the font sizes map for adb-icons()
+// @usage:
+// .big-favorite-button {
+//     =_adb-theme-icon-size(large);
+//     <other icon-related styles>
+// }
+// @see adb-theme-icon-sizes
+@mixin _adb-theme-icon-size($size-name) {
+    @extend %adb-theme-icon_size__#{$size-name};
+}

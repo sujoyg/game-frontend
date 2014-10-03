@@ -1,0 +1,63 @@
+@mixin _transition ($properties:all, $timing:200ms, $function:ease) {
+    -webkit-transition: $properties $timing $function;
+    -moz-transition: $properties $timing $function;
+    -ms-transition: $properties $timing $function;
+    -o-transition: $properties $timing $function;
+    transition: $properties $timing $function;
+}
+
+@mixin _reset-box ($attributes:box) {
+
+    @if $attributes == box {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    } @else {
+        @each $attributes in $attributes {
+            #{$attributes}: 0;
+        }
+    }
+
+}
+
+// See Compass 0.12.2 http://compass-style.org/reference/compass/css3/inline_block/
+// @mixin _inline-block
+// @param $alignment {String} optional vertical-align value. Default: null
+@mixin _inline-block($alignment:middle) {
+    @if $adb-support-mozilla {
+        display: -moz-inline-stack;
+    }
+    display: inline-block;
+    @if $alignment and $alignment != none {
+        vertical-align: $alignment;
+    }
+    @if $adb-support-ie7 {
+        zoom: 1;
+        *vertical-align: auto;
+        *display: inline;
+    }
+}
+
+@mixin _animation($name, $duration:200ms, $function:ease, $delay:0s, $iteration:1, $direction:both) {
+    @if $adb-support-webkit {
+        -webkit-animation: $name $duration $function $delay $iteration $direction;
+    }
+
+    @if $adb-support-mozilla {
+        -moz-animation: $name $duration $function $delay $iteration $direction;
+    }
+
+    @if $adb-support-ie {
+        -ms-animation: $name $duration $function $delay $iteration $direction;
+    }
+
+    @if $adb-support-opera {
+        -o-animation: $name $duration $function $delay $iteration $direction;
+    }
+
+    animation: $name $duration $function $delay $iteration $direction;
+
+    @if $adb-support-khtml {
+        -khtml-animation: $name $duration $function $delay $iteration $direction;
+    }
+}
