@@ -16,10 +16,6 @@ class GameController < ApplicationController
   end
 
   def check
-    if get_rounds >= $globals.game.rounds
-      Play.finish(current_user, get_score)
-    end
-
     if get_rounds < $globals.game.rounds
       set_result session[:name], params[:guess]
     end
@@ -39,10 +35,6 @@ class GameController < ApplicationController
   end
 
   def next
-    if get_rounds >= $globals.game.rounds
-      Play.finish(current_user, get_score)
-    end
-
     if get_rounds < $globals.game.rounds
       if session[:state] == 'waiting' # This is a skip
         increase_round

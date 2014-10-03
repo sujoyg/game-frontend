@@ -5,10 +5,6 @@ class UsersController < ApplicationController
   before_filter { |c| c.send :authorize, root_path }
 
   def home
-    if get_rounds >= $globals.game.rounds
-      Play.finish(current_user, get_score)
-    end
-
     if session[:state]
       @person = People.find(session[:person_id])
     else
