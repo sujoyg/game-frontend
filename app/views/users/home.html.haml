@@ -1,7 +1,7 @@
 - set_css 'game/play'
 - set_javascript 'game/play'
 
-= form_tag game_check_path, :class => "game flip", :data => {"next" => game_next_path, "finish" => game_leaderboard_path, "state" => game_state_path} do
+= form_tag game_check_path, :class => "game flip", :data => {"next" => game_next_path, "finish" => game_finish_path, "state" => game_state_path} do
     .flipper{class: @remaining == 0 ? "flipped" : ""}
         .face.front
             .card.card__initial.clearfix

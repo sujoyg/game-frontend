@@ -71,7 +71,11 @@ class GameController < ApplicationController
           remaining: 0
       }
     end
+  end
 
+  def finish
+    Play.finish(current_user, get_score)
+    redirect_to game_leaderboard_path
   end
 
   def state
