@@ -23,7 +23,7 @@ def preprocess(input, output)
   output
 end
 
-$app = 'Game'
+$app = 'Name That Coworker'
 preprocess('support/globals.yml', 'globals.yml')
 $globals = Globals.read File.expand_path('../globals.yml', __FILE__), Rails.env
 preprocess('support/database.yml', 'database.yml')

@@ -1,5 +1,6 @@
 function render(state) {
   $("form.game input[name='guess']").val("");
+  $(".game .card--image img").attr("src", state["image"]);
 
   // Update scores
   $(".score--unit__correct .score--number").text(state["score"]);
@@ -19,8 +20,6 @@ function render(state) {
     $("#button_finish").show();
   }
 
-  $(".game .card--image img").attr("src", state["image"]);
-
   if (state["state"] == "flipped" || state["state"] == "over") {
     // Update user information
     $(".game .name").text(state["name"]);
@@ -31,6 +30,8 @@ function render(state) {
     if (state["state"] == "over") {
       $(".game .status").hide();
     }
+
+    $(".game .card--image img").attr("src", "");
 
     $(".game .flipper").addClass("flipped");
   } else {

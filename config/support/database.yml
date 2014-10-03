@@ -6,18 +6,20 @@ shared: &shared
   username: root
   password: password
 
+amazon: &amazon
+  <<: *shared
+  username: user
+  password: fair5count
+  host: main.cnfssaanjxye.us-east-1.rds.amazonaws.com
+
 development:
   <<: *shared
-  database: <%= $globals.app.underscore %>_<%= $globals.user %>_development
+  database: <%= $globals.app.parameterize.underscore %>_<%= $globals.user %>_development
 
 production:
-  <<: *shared
-  database: <%= $globals.app.underscore %>
-
-sandbox:
-  <<: *shared
-  database: <%= $globals.app.underscore %>_sandbox
+  <<: *amazon
+  database: <%= $globals.app.parameterize.underscore %>
 
 test:
   <<: *shared
-  database: <%= $globals.app.underscore %>_<%= $globals.user %>_test
+  database: <%= $globals.app.parameterize.underscore %>_<%= $globals.user %>_test
