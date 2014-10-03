@@ -11,7 +11,7 @@ class GameController < ApplicationController
   def autocomplete
     people = People.all
 
-    pattern = params[:term].split.join('.*')
+    pattern = params[:term].split.join('.*').downcase
     render json: people.map(&:name).select { |name| name.downcase =~ /.*#{pattern}.*/ }
   end
 
