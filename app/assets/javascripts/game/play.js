@@ -3,6 +3,8 @@ var gamestate = {};
 function render(state) {
   gamestate = state;
   $("form.game input[name='guess']").val("");
+  $("form.game input[name='guess']").focus();
+
   $(".game .card--image img").attr("src", state["image"]);
 
   // Update scores
