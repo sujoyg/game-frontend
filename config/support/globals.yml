@@ -4,7 +4,7 @@ shared: &shared
     host: 23.23.98.118:8090
   app: <%= $app %>
   game:
-    rounds: 10
+    rounds: 20
   token: 2def5bdfe89f8dda89d37fb95932483450cf995b20252fc60cbe82cf1e0688504a79c25bfcc52c123c9d37cc3b806753854b9b473e4f3ba8db415bbe40390fe6
   user: <%= ENV["USER"].gsub(/[^a-zA-Z0-9]/, '_') %>
 
