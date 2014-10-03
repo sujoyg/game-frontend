@@ -29,7 +29,7 @@ module GameHelper
   end
 
   def set_result(name, guess)
-    hit = name == guess
+    hit = name.downcase == guess.downcase
     increase_score if hit
     increase_round
 
